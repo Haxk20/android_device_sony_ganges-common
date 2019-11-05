@@ -16,7 +16,7 @@
 PLATFORM_COMMON_PATH := device/sony/ganges-common
 
 SOMC_PLATFORM := ganges
-SOMC_KERNEL_VERSION := 4.9
+SOMC_KERNEL_VERSION := 4.14
 KERNEL_PATH := kernel/sony/msm-$(SOMC_KERNEL_VERSION)
 
 $(call inherit-product, device/sony/common/common.mk)
@@ -33,7 +33,6 @@ DEVICE_PACKAGE_OVERLAYS += \
 
 # A/B support
 AB_OTA_UPDATER := true
-TARGET_USES_HARDWARE_QCOM_BOOTCTRL := true
 
 PRODUCT_SHIPPING_API_LEVEL := 27
 
@@ -54,15 +53,8 @@ PRODUCT_PACKAGES += \
     update_engine_client \
     update_engine_sideload \
     update_verifier \
-    bootctrl.sdm660
-
-# Enable update engine sideloading by including the static version of the
-# boot_control HAL and its dependencies.
-PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.sdm660 \
-    libgptutils \
-    libz \
-    libcutils
+    bootctrl.sdm660.recovery
 
 AB_OTA_PARTITIONS += \
     boot \
